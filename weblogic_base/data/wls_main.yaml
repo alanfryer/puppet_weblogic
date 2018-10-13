@@ -1,0 +1,15 @@
+---
+weblogic_base::wls_os_user:                    'oracle'
+weblogic_base::wls_os_user_uid:                '500'
+weblogic_base::wls_os_group:                   'oinstall'
+weblogic_base::java_home_dir:                  '/usr/java/jdk1.8.0_51/jre'
+
+weblogic_base::install_type:                   'wls'
+weblogic_base::os_shell:                       '/bin/bash'
+weblogic_base::ora_inventory_dir:              '/home/oracle/oraInventory'
+weblogic_base::orainst_dir:                    '/etc'
+weblogic_base::user_home_dir:                  '/home'
+weblogic_base::tmp_dir:                        '/tmp'
+weblogic_base::apps_dir:                       'user_projects/apps'
+weblogic_base::adminserver_name:               'wlsdomain'  
+weblogic_base::restricted:                     false  
