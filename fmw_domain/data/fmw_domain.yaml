@@ -1,0 +1,13 @@
+---
+fmw_domain::version:                       '12.2.1' 
+fmw_domain::os_user:                       'oracle'
+fmw_domain::os_group:                      'oinstall'
+fmw_domain::restricted:                    false
+fmw_domain::nodemanager_port:              5556
+fmw_domain::middleware_home_dir:           '/opt/oracle/middleware'
+fmw_domain::weblogic_user:                 'weblogic'
+fmw_domain::adminserver_name:              'AdminServer'
+fmw_domain::adminserver_listen_port:       7001
+fmw_domain::domains_dir:                   '/opt/oracle/middleware/user_projects/domains'
+fmw_domain::apps_dir:                      '/opt/oracle/middleware/user_projects/applications'
+fmw_domain::adminserver_startup_arguments: '-XX:PermSize=256m -XX:MaxPermSize=512m -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom'

@@ -58,7 +58,7 @@ class fmw_domain::domain(
       mode    => '0775',
       owner   => $fmw_domain::os_user,
       group   => $fmw_domain::os_group,
-      require => File[$domain_parent_dir],
+      #require => File[$domain_parent_dir],
     }
 
     # create domain

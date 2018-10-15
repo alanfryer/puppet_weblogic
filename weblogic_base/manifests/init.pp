@@ -1,13 +1,8 @@
 class weblogic_base {
-
+   $version                        = lookup('weblogic_base::wls_version', String)
    $java_home_dir                  = lookup('weblogic_base::java_home_dir', String)
    $source_file                    = lookup('weblogic_base::wls_source_file', String)
-   $wls_version                    = lookup('weblogic_base::wls_version', String)
-   $wls_middleware_home_dir        = lookup('weblogic_base::wls_middleware_home_dir', String)
-   $wls_os_user                    = lookup('weblogic_base::wls_os_user', String)
-   $wls_os_user_uid                = lookup('weblogic_base::wls_os_user_uid', String)
-   $wls_os_group                   = lookup('weblogic_base::wls_os_group', String)
-
+   $middleware_home_dir            = lookup('weblogic_base::wls_middleware_home_dir', String)
    $domain_name                    = lookup('weblogic_base::domain_name', String)
    $machine_name                   = lookup('weblogic_base::machine_name', String)
    $weblogic_user                  = lookup('weblogic_base::weblogic_user', String)
@@ -20,27 +15,21 @@ class weblogic_base {
    $nodemanager_port               = lookup('weblogic_base::nodemanager_port', Integer)
 
    class { 'fmw_wls':
-      version             => $wls_version,
-      middleware_home_dir => $wls_middleware_home_dir,
-      os_user             => $wls_os_user,
-      os_user_uid         => $wls_os_user_uid,
-      os_group            => $wls_os_group,
+      middleware_home_dir => $middleware_home_dir,
    }
 
    class{'fmw_wls::install':
       java_home_dir => $java_home_dir,
       source_file   => $source_file,
    }
-
+   
    class { 'fmw_domain': 
       version                       => $wls_version,                                          
       java_home_dir                 => $java_home_dir,
-      middleware_home_dir           => $wls_middleware_home_dir,                            
-      weblogic_home_dir             => "${wls_middleware_home_dir}/wlserver",
-      os_user                       => $wls_os_user,                                           
-      os_group                      => $wls_os_group,                                          
-      domains_dir                   => "${wls_middleware_home_dir}/domains",     
-      apps_dir                      => "${wls_middleware_home_dir}/apps", 
+      middleware_home_dir           => $middleware_home_dir,                            
+      weblogic_home_dir             => "${middleware_home_dir}/wlserver",
+      domains_dir                   => "${middleware_home_dir}/domains",     
+      apps_dir                      => "${middleware_home_dir}/apps", 
       domain_name                   => $domain_name,
       machine_name                  => $machine_name,
       weblogic_user                 => $weblogic_user,                                         

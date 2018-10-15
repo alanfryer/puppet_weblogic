@@ -1,0 +1,6 @@
+---
+fmw_wls::ora_inventory_dir:              '/home/oracle/oraInventory'
+fmw_wls::os_shell:                       '/bin/bash'
+fmw_wls::orainst_dir:                    '/etc'
+fmw_wls::user_home_dir:                  '/home'
+fmw_wls::tmp_dir:                        '/tmp'

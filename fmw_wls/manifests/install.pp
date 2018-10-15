@@ -6,9 +6,9 @@
 class fmw_wls::install(
   $java_home_dir   = undef,
   $source_file     = undef,
-  $install_type    = $fmw_wls::params::install_type,
-) inherits fmw_wls::params {
-
+  $install_type    = $fmw_wls::install_type,
+) #inherits fmw_wls::params {
+{
   require fmw_wls
 
   unless $::kernel in ['windows', 'Linux', 'SunOS'] {

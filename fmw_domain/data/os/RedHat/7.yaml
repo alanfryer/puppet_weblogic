@@ -1,0 +1,4 @@
+---
+fmw_domain::user_home_dir:                 '/home'
+fmw_domain::tmp_dir:                       '/tmp'
+
