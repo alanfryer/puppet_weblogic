@@ -9,7 +9,7 @@ hierarchy:
   - name: "env"
     path: "environments/%{environment}.yaml"
 
-  - name: "common"
-    path: "common.yaml"
+  - name: "weblogic_base."
+    path: "weblogic_base.yaml"
 
     

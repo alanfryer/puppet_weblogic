@@ -10,3 +10,11 @@ weblogic_base::wls_middleware_home_dir: '/opt/oracle/Weblogic'
 weblogic_base::apps_dir:                'user_projects/apps'
 weblogic_base::adminserver_name:        'AdminServer'  
 weblogic_base::restricted:              false 
+weblogic_base::nodemanager_port:        9556
+weblogic_base::adminserver_listen_port: 9001
+weblogic_base::domain_name:             'wlsdomain'
+weblogic_base::machine_name:            'machine'
+weblogic_base::weblogic_user:           'weblogic'
+weblogic_base::weblogic_password:       'welcome1'
+weblogic_base::adminserver_startup_arguments: '-XX:PermSize=256m -XX:MaxPermSize=512m -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom'
+
