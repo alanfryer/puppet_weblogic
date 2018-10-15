@@ -1,14 +1,10 @@
 ---
-weblogic_base::wls_version: '12.2.1' # 10.3.6|12.1.1|12.1.2|12.1.3|12.2.1
-weblogic_base::wls_middleware_home_dir:        '/opt/oracle/Weblogic-prod'
-weblogic_base::wls_source_file:                '/home/afryer/weblogic/fmw_12.2.1.3.0_wls.jar'
-weblogic_base::domain_name:                    'proddomain'
-weblogic_base::machine_name:                   'prodmachine'
+weblogic_base::domain_name:                    'prod-domain'
+weblogic_base::machine_name:                   'prod-machine'
 weblogic_base::weblogic_user:                  'weblogic'
 weblogic_base::weblogic_password:              'welcome1'
 weblogic_base::nodemanager_listen_address:     'ip-10-0-0-61'
 weblogic_base::nodemanager_port:               9556
-weblogic_base::adminserver_name:               'AdminServer-prod'  
 weblogic_base::adminserver_listen_address:     'ip-10-0-0-61'
 weblogic_base::adminserver_listen_port:        9001
 weblogic_base::adminserver_startup_arguments:  '-XX:PermSize=256m -XX:MaxPermSize=512m -Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom'

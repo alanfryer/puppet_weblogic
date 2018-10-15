@@ -1,0 +1,6 @@
+---
+weblogic_base::ora_inventory_dir:              '/home/oracle/oraInventory'
+weblogic_base::os_shell:                       '/bin/bash'
+weblogic_base::orainst_dir:                    '/etc'
+weblogic_base::user_home_dir:                  '/home'
+weblogic_base::tmp_dir:                        '/tmp'

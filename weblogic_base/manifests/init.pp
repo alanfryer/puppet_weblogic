@@ -13,10 +13,10 @@ class weblogic_base {
    $weblogic_user                  = lookup('weblogic_base::weblogic_user', String)
    $weblogic_password              = lookup('weblogic_base::weblogic_password', String)
    $adminserver_name               = lookup('weblogic_base::adminserver_name', String)
-   $adminserver_listen_address     = lookup('weblogic_base::adminserver_listen_address', String)
+   $adminserver_listen_address     = $hostname
    $adminserver_listen_port        = lookup('weblogic_base::adminserver_listen_port', Integer)
    $adminserver_startup_arguments  = lookup('weblogic_base::adminserver_startup_arguments', String)
-   $nodemanager_listen_address     = lookup('weblogic_base::nodemanager_listen_address', String)
+   $nodemanager_listen_address     = $hostname
    $nodemanager_port               = lookup('weblogic_base::nodemanager_port', Integer)
 
    class { 'fmw_wls':
