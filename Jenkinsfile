@@ -87,7 +87,7 @@ node ('ip-10-0-0-61') {
             sh "echo '${respContent}' > ${MODULE_PATH}/WLS.resp"
             updateResp()
             sh "tar -czvf install_weblogic.tar.gz *"
-            nexusArtifactUploader artifacts: [[artifactId: 'puppet-weblogic', classifier: '', file: 'install_weblogic.tar.gz', type: 'tar.gz']], credentialsId: 'nexus', groupId: 'hsbc.com', nexusUrl: '192.168.64.128:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'C2B2-Snapshots', version: "1.0.0-${env.BUILD_NUMBER}-SNAPSHOT"
+           #nexusArtifactUploader artifacts: [[artifactId: 'puppet-weblogic', classifier: '', file: 'install_weblogic.tar.gz', type: 'tar.gz']], credentialsId: 'nexus', groupId: 'hsbc.com', nexusUrl: '192.168.64.128:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'C2B2-Snapshots', version: "1.0.0-${env.BUILD_NUMBER}-SNAPSHOT"
         }
         stage('Install') {
     
