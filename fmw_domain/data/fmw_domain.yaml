@@ -4,7 +4,7 @@ fmw_domain::os_user:                       'oracle'
 fmw_domain::os_group:                      'oinstall'
 fmw_domain::restricted:                    false
 fmw_domain::nodemanager_port:              5556
-fmw_domain::middleware_home_dir:           '/opt/oracle/middleware'
+fmw_domain::middleware_home_dir:           '/opt/Oracle/Weblogic12cR2'
 fmw_domain::weblogic_user:                 'weblogic'
 fmw_domain::adminserver_name:              'AdminServer'
 fmw_domain::adminserver_listen_port:       7001

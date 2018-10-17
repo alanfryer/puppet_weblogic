@@ -1,7 +1,7 @@
 ---
-fmw_wls::version:               '12.2.1' 
-fmw_wls::middleware_home_dir:           '/opt/oracle/middleware'
-fmw_wls::install_type: 'wls'
-fmw_wls::os_user:      'oracle'
-fmw_wls::os_user_uid:  '500'
-fmw_wls::os_group:     'oinstall'
+fmw_wls::version:             '12.2.1' 
+fmw_wls::middleware_home_dir: '/opt/Oracle/Weblogic12cR2'
+fmw_wls::install_type:        'wls'
+fmw_wls::os_user:             'oracle'
+fmw_wls::os_user_uid:         '500'
+fmw_wls::os_group:            'oinstall'
