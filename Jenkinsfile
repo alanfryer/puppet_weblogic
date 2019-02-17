@@ -71,11 +71,21 @@ def updateResp1() {
     < ${MODULE_PATH}/WLS.bkp > ${MODULE_PATH}/WLS.resp
     """.stripIndent()
 }
-node ('ip-10-0-0-61') {
-    try {      
-        stage('Preparation') { // for display purposes
-                
-            git branch: 'master', credentialsId: 'github-alanfryer', url: 'https://github.com/alanfryer/puppet_weblogic/'
+
+podTemplate(label: 'mypod', containers: [
+    containerTemplate(name: 'git', image: 'alpine/git', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', command: 'cat', ttyEnabled: true),
+    containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
+  ],
+  volumes: [
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
+  ]
+  ) {
+    node('mypod') {
+        
+        stage('Clone repository') {
+            container('git') {
+            git branch: 'master', credentialsId: 'github', url: 'https://github.com/alanfryer/puppet_weblogic/'
 
             yamlContent = createYaml()
 
@@ -87,18 +97,9 @@ node ('ip-10-0-0-61') {
             sh "echo '${respContent}' > ${MODULE_PATH}/WLS.resp"
             updateResp()
             sh "tar -czvf install_weblogic.tar.gz *"
-           nexusArtifactUploader artifacts: [[artifactId: 'puppet-weblogic', classifier: '', file: 'install_weblogic.tar.gz', type: 'tar.gz']], credentialsId: 'nexus', groupId: 'hsbc.com', nexusUrl: '192.168.64.128:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'C2B2-Snapshots', version: "1.0.0-${env.BUILD_NUMBER}-SNAPSHOT"
+            }
         }
-        stage('Install') {
-    
-            sh 'sudo su - -c "puppet apply --debug --modulepath ${MODULE_PATH} --environment ${ENVIRONMENT} ${MODULE_PATH}/role_wls_122/manifests/site.pp"'
-        }
-    } catch (e) {
-        currentBuild.result = 'FAILURE'
-        throw e
-    } finally {
-        //if (params.HIPCHAT) {
-            notifyHipChat(currentBuild.result)
-        //}
-    }   
+
+    }
 }
+
