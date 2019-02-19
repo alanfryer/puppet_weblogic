@@ -41,7 +41,7 @@ def createYaml() {
         return content
 }
 
-podTemplate(label: 'mypod', containers: [
+podTemplate(label: 'cicdpod', containers: [
     containerTemplate(name: 'git', image: 'alpine/git', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', command: 'cat', ttyEnabled: true),
     containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
@@ -50,24 +50,29 @@ podTemplate(label: 'mypod', containers: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
   ]
   ) {
-    node('mypod') {
-        
-        stage('Clone repository') {
-            container('git') {
-            ENVIRONMENT = 'test'
-            MODULE_PATH = '/home/jenkins/workspace'
-            git branch: 'master', credentialsId: 'github', url: 'https://github.com/alanfryer/puppet_weblogic/'
+    node('cicdpod') {
+       try {  
+          stage('Clone repository') {
+             container('git') {
+                ENVIRONMENT = 'test'
+                MODULE_PATH = '/home/jenkins/workspace'
+                git branch: 'master', credentialsId: 'github', url: 'https://github.com/alanfryer/puppet_weblogic/'
+ 
+                yamlContent = createYaml()
 
-            yamlContent = createYaml()
+                def yamlFile = "${MODULE_PATH}/weblogic_base/data/environments/${ENVIRONMENT}.yaml"
+                sh "mkdir -p ${MODULE_PATH}/weblogic_base/data/environments"
+                sh "echo '${yamlContent}' > ${yamlFile}"
+                sh "tar -czvf install_weblogic.tar.gz *"
+              }
+           }
+       } catch (e) {
+           currentBuild.result = 'FAILURE'
+           throw e
+       } finally {
+          notifyHipChat(currentBuild.result)
 
-            def yamlFile = "${MODULE_PATH}/weblogic_base/data/environments/${ENVIRONMENT}.yaml"
-            sh "mkdir -p ${MODULE_PATH}/weblogic_base/data/environments"
-            sh "echo '${yamlContent}' > ${yamlFile}"
-
-            sh "tar -czvf install_weblogic.tar.gz *"
-            }
-        }
-
+       } 
     }
 }
 
