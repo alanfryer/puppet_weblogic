@@ -70,7 +70,8 @@ podTemplate(label: 'cicdpod', containers: [
            currentBuild.result = 'FAILURE'
            throw e
        } finally {
-          notifyHipChat(currentBuild.result)
+          //notifyHipChat(currentBuild.result)
+          echo currentBuild.result
 
        } 
     }
